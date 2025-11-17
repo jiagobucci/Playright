@@ -18,13 +18,13 @@ export default defineConfig({
 },
 
 
-  projects: [
+projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'],
-      locale: 'pt-BR'
+      use: {
+        ...devices['Desktop Chrome'],
+        locale: 'pt-BR',
       },
-
     },
   ],
 });
