@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://omni-qa-automacao.plusoftomni.com.br/#!/');
+  await page.getByRole('textbox', { name: ' Login' }).fill('qa');
+  await page.getByRole('textbox', { name: ' Senha' }).fill('QA@123456');
+  await page.getByRole('button', { name: 'login' }).click();
+  await page.getByRole('link', { name: ' qa ' }).click();
+  await page.getByRole('link', { name: ' Administrador' }).click();
+  await page.getByRole('listitem', { name: 'E-mail', exact: true }).getByLabel('menu.group').click();
+  await page.locator('a[role="button"][aria-label="menu.group"] span.menu-text', { hasText: 'E-mail' });
+  await page.locator('a').filter({ hasText: 'Caixas de e-mail' }).first().click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: 'new' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('textbox', { name: 'Caixa de e-mail' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('textbox', { name: 'Caixa de e-mail' }).fill('QA CAIXA EMAIL');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByLabel('Haverá Identificação').selectOption('string:N');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('checkbox', { name: 'Utilizar Recebimento' }).check();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-receiverconfig').selectOption('string:G');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-receiveruser').fill('qaninja.plusoft@gmail.com');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-receiveruser').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#collapse-plusoftcrmmailformv2adminmailboxforminclude1505479597152').getByRole('button', { name: 'Definir Senha' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#input-passwd').fill('psae xduc ieuc irpi');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Salvar' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('checkbox', { name: 'Utilizar Envio' }).check();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-senderconfig').selectOption('string:G');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-senderuser').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-senderuser').fill('qaninja.plusoft@gmail.com');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#collapse-plusoftcrmmailformv2adminmailboxforminclude1505480379385').getByRole('button', { name: 'Definir Senha' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#input-passwd').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#input-passwd').fill('psae xduc ieuc irpi');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Salvar' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('textbox', { name: 'Remetente' }).fill('qaninja.plusoft@gmail.com');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: 'save', exact: true }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByText('O registro foi incluído com').click();
+});
