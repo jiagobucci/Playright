@@ -1,53 +1,42 @@
 import { test, expect } from '@playwright/test';
-import { test as setup } from '@playwright/test';
-import path from 'path';
 
-// // Caminho do arquivo correto para o storageState JSON
-// const authFile = path.join(__dirname, 'auth.json');
-
-// setup('autenticando o login manualmente', async ({ page }) => {
+// test('gera auth.json', async ({ page }) => {
 //   await page.goto('https://plusoft-itsm.inpaas.com');
-//   await page.waitForTimeout(1000);
+
+//   // 2. Preencha o login (ajuste para seu caso real)
 //   await page.getByRole('button', { name: 'Acessar com conta Office 365' }).click();
-
-//   // Login Microsoft
 //   await page.fill('#i0116', 'jonathaniagobucci@plusoft.com');
+//   await page.fill('#i0118', 'Jbi@srp%2025');
+//   await page.waitForTimeout(2000)
 //   await page.click('#idSIButton9');
-//   await page.fill('#i0118', 'Jbi@srp%25');
-//   await page.click('#idSIButton9');
 
-//   await page.waitForTimeout(4000);
+//   // 👇 IMPORTANTE: aguarde a aplicação carregar autenticada
+//   await page.waitForURL('https://plusoft-itsm.inpaas.com/**', {
+//     timeout: 45000,
+//   });
 
-//   // Pause para aprovar 2FA manualmente
-//   await page.pause();
+//   // 👇 Dê um tempo para os scripts criarem a sessão
+//   await page.waitForLoadState('networkidle');
 
-//   // Espera a URL final aparecer (ajuste o timeout maior, caso necessário)
-//   await page.waitForURL('**/dynamiciframe**', { timeout: 30000 });
-
-//   // Salva o contexto autenticado em formato JSON
-//   await page.context().storageState({ path: authFile });
-//   console.log('Autenticacao realizada com sucesso!');
+//   // Agora sim, a sessão da aplicação existe
+//   await page.context().storageState({ path: 'e2e/auth.json' });
 // });
 
 
-// Passa o storageState para todos os testes deste arquivo
-
-test('Acesso autenticado', async ({ page, context }) => {
-  // Já vai abrir autenticado!
+test('Acesso autenticado', async ({ page }) => {
   await page.goto('https://plusoft-itsm.inpaas.com');
-
   await page.getByRole('button', { name: 'Acessar com conta Office 365' }).click();
-  await page.waitForTimeout(1000)
-  await page.locator('a >> text=Gestão de acessos').first().click();
+  await page.waitForTimeout(3000)
+  await page.frameLocator('iframe[name="frame_middle"]')
+  await page.getByText('Gestão de acessos').click();
   await page.waitForLoadState('networkidle');
   await page.frameLocator('iframe[name="frame_middle"]')
-    .locator('button.btn.btn-lg.btn-success.btn-labeled.ng-scope')
-    .click();
+    .locator('button.btn.btn-lg.btn-success.btn-labeled.ng-scope').click();
   await page.waitForLoadState('networkidle');
   await page.frameLocator('iframe[name="frame_middle"]')
     .locator('#field-title').fill('Acesso GDA');
   await page.frameLocator('iframe[name="frame_middle"]')
-    .locator('#field-field_string_454707').fill('omni-qa4');
+    .locator('#field-field_string_454707').fill('abai-qa');
   await page.waitForTimeout(2000);
   await page.frameLocator('iframe[name="frame_middle"]')
     .locator('a.dropdown-toggle[data-uib-dropdown-toggle=""]').click();

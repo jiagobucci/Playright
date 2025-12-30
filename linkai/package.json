@@ -1,0 +1,17 @@
+{
+  "name": "playwright-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@playwright/test": "^1.54.0",
+    "@types/node": "^24.0.12",
+    "bcryptjs": "^3.0.2",
+    "mongodb": "^6.18.0"
+  }
+}

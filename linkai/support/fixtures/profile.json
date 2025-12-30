@@ -1,0 +1,45 @@
+{
+  "user": {
+    "name": "Steve Jobs",
+    "email": "jobs@apple.com",
+    "username": "stevejobs",
+    "bio": "",
+    "password": "pwd123"
+  },
+  "links": [
+    {
+      "name": "Meu Blog",
+      "url": "https://blog.apple.com"
+    },
+    {
+      "name": "Portfólio",
+      "url": "https://steveportfolio.com"
+    },
+    {
+      "name": "Canal no YouTube",
+      "url": "https://www.youtube.com/@stevejobs"
+    },
+    {
+      "name": "Repositórios Open Source",
+      "url": "https://opensource.apple.com"
+    },
+    {
+      "name": "Medium",
+      "url": "https://medium.com/@stevejobs"
+    }
+  ],
+  "socials": {
+    "github": {
+      "platform": "GitHub",
+      "username": "stevejobsdev"
+    },
+    "linkedin": {
+      "platform": "LinkedIn",
+      "username": "stevejobs"
+    },
+    "instagram": {
+      "platform": "Instagram",
+      "username": "stevejobs"
+    }
+  }
+}
