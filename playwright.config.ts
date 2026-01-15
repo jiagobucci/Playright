@@ -14,7 +14,7 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    storageState: 'e2e/auth.json', // ✅ caminho correto
+    storageState: 'e2e/authentication/auth.json', // ✅ caminho correto
   },
 
 

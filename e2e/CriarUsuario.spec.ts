@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { realizarLogin } from './authentication/login.helper.ts';
 
 test('Criar Usuário', async ({ page }) => {
-  await page.goto('https://omni-qa-automacao.plusoftomni.com.br/');
-  await page.getByRole('textbox', { name: ' Login' }).fill('qa');
-  await page.getByRole('textbox', { name: ' Senha' }).fill('QA@123456');
-  await page.getByRole('button', { name: 'login' }).click();
+  await realizarLogin(page);
+  // await page.goto('https://omni-qa-automacao.plusoftomni.com.br/');
+  // // await page.getByRole('textbox', { name: ' Login' }).fill('qa');
+  // await page.getByRole('textbox', { name: ' Senha' }).fill('QA@123456');
+  // await page.getByRole('button', { name: 'login' }).click();
   await page.waitForTimeout(2000)
   await page.getByRole('link', { name: ' qa ' }).click();
   await page.getByRole('link', { name: ' Administrador' }).click();

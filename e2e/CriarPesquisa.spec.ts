@@ -1,13 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { TIMEOUT } from 'dns';
+import { realizarLogin } from './authentication/login.helper';
+
 
 test('test', async ({ page }) => {
-  await page.goto('https://omni-qa-automacao.plusoftomni.com.br/#!/');
-  await page.getByRole('textbox', { name: ' Login' }).click();
-  await page.getByRole('textbox', { name: ' Login' }).fill('qa');
-  await page.getByRole('textbox', { name: ' Login' }).press('Tab');
-  await page.getByRole('textbox', { name: ' Senha' }).fill('QA@123456');
-  await page.getByRole('button', { name: 'login' }).click();
+  await realizarLogin(page);
   await page.getByRole('link', { name: ' qa ' }).click();
   await page.getByRole('link', { name: ' Administrador' }).click();
   await page.waitForTimeout(2000)

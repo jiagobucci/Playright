@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { realizarLogin } from './authentication/login.helper';
 
 test('Criar Grade de horário', async ({ page }) => {
-  await page.goto('https://omni-qa-automacao.plusoftomni.com.br/#!/');
-  await page.getByRole('textbox', { name: ' Login' }).fill('omni');
-  await page.getByRole('textbox', { name: ' Senha' }).fill('123456');
-  await page.getByRole('button', { name: 'login' }).click();
-  await page.getByRole('link', { name: ' OMNI - Admin ' }).click();
+  await realizarLogin(page);
+  await page.getByRole('link', { name: ' qa ' }).click();
   await page.getByRole('link', { name: ' Administrador' }).click();
   await page.waitForTimeout(5000)
   await page.getByRole('listitem', { name: 'Calendário' }).getByLabel('menu.group').click();
