@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { realizarLogin } from './authentication/login.helper';
+   import { realizarLogin } from '../authentication/login.helper'; // caminho relativo correto
 
-test('test', async ({ page }) => {
+test('AlterarUsuário', async ({ page }) => {
   await realizarLogin(page);
-  await page.waitForTimeout(2000)
   await page.getByRole('link', { name: ' qa ' }).click();
   await page.getByRole('link', { name: ' Administrador' }).click();
   await page.getByRole('listitem', { name: 'Usuário', exact: true })

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { realizarLogin } from './authentication/login.helper.ts';
+   import { realizarLogin } from '../authentication/login.helper'; // caminho relativo correto
 
 test('Criar Usuário', async ({ page }) => {
   await realizarLogin(page);
@@ -7,7 +7,6 @@ test('Criar Usuário', async ({ page }) => {
   // // await page.getByRole('textbox', { name: ' Login' }).fill('qa');
   // await page.getByRole('textbox', { name: ' Senha' }).fill('QA@123456');
   // await page.getByRole('button', { name: 'login' }).click();
-  await page.waitForTimeout(2000)
   await page.getByRole('link', { name: ' qa ' }).click();
   await page.getByRole('link', { name: ' Administrador' }).click();
   await page.getByRole('listitem', { name: 'Usuário', exact: true }).getByLabel('menu.group').click();
@@ -25,11 +24,11 @@ test('Criar Usuário', async ({ page }) => {
   await page.locator('iframe[name="frame_middle"]').contentFrame()
     .getByRole('textbox', { name: 'E-Mail' }).click();
   await page.locator('iframe[name="frame_middle"]').contentFrame()
-    .getByRole('textbox', { name: 'E-Mail' }).fill('teste@usuario8.com');
+    .getByRole('textbox', { name: 'E-Mail' }).fill('teste@usuario11.com');
   await page.locator('iframe[name="frame_middle"]').contentFrame()
     .locator('#input-core_user-ds_loginname').click();
   await page.locator('iframe[name="frame_middle"]').contentFrame()
-    .locator('#input-core_user-ds_loginname').fill('usernew8');
+    .locator('#input-core_user-ds_loginname').fill('usernew11');
   await page.locator('iframe[name="frame_middle"]').contentFrame()
     .locator('#input-passwd').click();
   await page.locator('iframe[name="frame_middle"]').contentFrame()

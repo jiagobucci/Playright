@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { TIMEOUT } from 'dns';
-import { realizarLogin } from './authentication/login.helper';
+   import { realizarLogin } from '../authentication/login.helper'; // caminho relativo correto
 
 test('Cadastrar Time', async ({ page }) => {
   await realizarLogin(page);
