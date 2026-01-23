@@ -1,0 +1,41 @@
+import { test, expect } from '@playwright/test';
+import { TIMEOUT } from 'dns';
+import { realizarLogin } from '../authentication/login.helper';
+
+
+test('Criar Pesquisa', async ({ page }) => {
+  await realizarLogin(page);
+  await page.getByRole('link', { name: ' qa ' }).click();
+  await page.getByRole('link', { name: ' Administrador' }).click();
+  await page.locator('a').filter({ hasText: 'Pesquisa' }).first().click();
+  await page.locator('a').filter({ hasText: 'Pesquisa' }).nth(1).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Novo' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('textbox', { name: 'Descrição da Pesquisa' }).fill('Pesquisa QA');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Salvar' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('link', { name: 'Detalhes' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#dtStartDetail').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('cell', { name: '23' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#dtEndDetail').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('cell', { name: '30' }).nth(1).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#dtEndDetail').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#dtEndDetail').fill('30/01/2029');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('label').filter({ hasText: 'Modelo 1' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#multiple_answers').check();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Salvar' }).click();
+  const page1Promise = page.waitForEvent('popup');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: 'Preview' }).click();
+  const page1 = await page1Promise;
+  await page1.close();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: 'Publicar' }).click();
+  await expect(page.locator('iframe[name="frame_middle"]').contentFrame().getByText('Desejar realmente publicar')).toBeVisible();
+  await expect(page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Confirmar' })).toBeVisible();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Confirmar' }).click();
+  await expect(page.getByText('Script de catálogo finalizado')).toBeVisible();
+  await page.getByText('Script de entidades').click();
+  await page.getByText('Iniciando procedimentos de').click();
+  await page.getByText('Script de catálogo finalizado').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Cancelar' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: ' Confirmar' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('gridcell', { name: 'Código: Ordenar colunas de' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('gridcell', { name: 'Código: Ordenar colunas de' }).click();
+});

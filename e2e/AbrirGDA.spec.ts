@@ -36,7 +36,7 @@ test('Acesso autenticado', async ({ page }) => {
   await page.frameLocator('iframe[name="frame_middle"]')
     .locator('#field-title').fill('Acesso GDA');
   await page.frameLocator('iframe[name="frame_middle"]')
-    .locator('#field-field_string_454707').fill('sistel-dev2');
+    .locator('#field-field_string_454707').fill('alelo-dev2');
   await page.waitForTimeout(2000);
   await page.frameLocator('iframe[name="frame_middle"]')
     .locator('a.dropdown-toggle[data-uib-dropdown-toggle=""]').click();
