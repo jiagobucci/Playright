@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { realizarLogin } from './authentication/login.helper';
+import { realizarLogin } from '../authentication/login.helper';
 
 test('Criar Grade de horário', async ({ page }) => {
   await realizarLogin(page);

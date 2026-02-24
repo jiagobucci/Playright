@@ -1,28 +1,38 @@
 import { test, expect } from '@playwright/test';
 
 
-test('Bater ponto', async ({ page }) => {
-  await page.goto('https://plusoft-prd-197741.rm.cloudtotvs.com.br/FrameHTML/web/app/RH/PortalMeuRH/#/login');
-  await page.getByRole('textbox', { name: 'Informe o seu usuário' }).click();
-  await page.getByRole('textbox', { name: 'Informe o seu usuário' }).fill('jonathaniagobucci@plusoft.com');
-  await page.getByRole('textbox', { name: 'Informe sua senha' }).click();
-  await page.getByRole('textbox', { name: 'Informe sua senha' }).fill('Jbi@srp%2026');
-  await page.locator('span.po-button-label:has-text("Entrar")').click()
+// test('gera auth1.json', async ({ page }) => {
+//   await page.goto('https://cliente.apdata.com.br/PLUSOFT/apdist/auth/login');
 
-  // Navegar para bater ponto
-  await page.locator('span.po-menu-icon-label:has-text("Ponto")').click();
-  await page.locator('span:has-text("Bater ponto")').click();
-  await page.getByRole('button', { name: 'Fechar' }).click();
+//   // 2. Preencha o login (ajuste para seu caso real)
+//   await page.getByRole('button', { name: 'Aceitar todos' }).click();
+//   await page.getByRole('button', { name: 'Entrar no portal' }).click();
+//   await page.getByRole('textbox', { name: 'Insira o seu email, telefone' }).click();
+//   await page.getByRole('textbox', { name: 'Insira o seu email, telefone' }).fill('jonathaniagobucci@plusoft.com');
+//   await page.getByRole('textbox', { name: 'Insira o seu email, telefone' }).press('Tab');
+//   await page.getByRole('button', { name: 'Avançar' }).click();
+//   await page.getByRole('button', { name: 'Avançar' }).click();
+//   await page.getByRole('textbox', { name: 'Insira a senha para' }).click();
+//   await page.getByRole('textbox', { name: 'Insira a senha para' }).fill('Jbi@srp%2025');
+//   await page.getByRole('button', { name: 'Entrar' }).click();
 
-  // Aguardar carregamento
-  await page.waitForLoadState('networkidle');
+//   // 👇 IMPORTANTE: aguarde a aplicação carregar autenticada
+//   await page.waitForURL('https://cliente.apdata.com.br/PLUSOFT/apdist/', {
+//     timeout: 2000,
+//   });
 
-  // Clicar no botão de bater ponto
-  await page.locator('#btn-app-swipe-clocking-register').waitFor({ state: 'visible' });
-  await page.waitForTimeout(1500);
-  await page.locator('#btn-app-swipe-clocking-register').dblclick();
+//   // 👇 Dê um tempo para os scripts criarem a sessão
+//   await page.waitForLoadState('networkidle');
 
-  // Validar que o ponto foi registrado
-  await expect(page.locator('text=Batida realizada')).toBeVisible({ timeout: 5000 });
-  console.log('✓ Ponto registrado com sucesso!');
+//   // Agora sim, a sessão da aplicação existe
+//   await page.context().storageState({ path: 'e2e/auth1.json' });
+// });
+
+test('Bater Ponto', async ({ page }) => {
+  await page.goto('https://cliente.apdata.com.br/PLUSOFT/apdist/auth/login');
+  await page.getByRole('button', { name: 'Aceitar todos' }).click();
+  await page.getByRole('button', { name: 'Entrar no portal' }).click();
+  await page.getByRole('button', { name: 'Ponto & Escala' }).click();
+  await page.getByRole('button', { name: 'Efetuar marcação' }).click();
+
 });

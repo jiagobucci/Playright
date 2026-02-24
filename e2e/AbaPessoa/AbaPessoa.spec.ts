@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { TIMEOUT } from 'dns';
-import { realizarLogin } from './authentication/login.helper';
+import { realizarLogin } from '../authentication/login.helper';
 
 test('Cadastrar Itens Aba Pessoa ADM', async ({ page }) => {
   await realizarLogin(page);

@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+import { TIMEOUT } from 'dns';
+import { realizarLogin } from '../authentication/login.helper';
+
+test('Texto padrao', async ({ page }) => {
+  await realizarLogin(page);
+  await page.getByRole('link', { name: ' qa ' }).click();
+  await page.getByRole('link', { name: ' Administrador' }).click();
+  await page.locator('a').filter({ hasText: 'Ocorrência' }).first().click();
+  await page.locator('a').filter({ hasText: 'Textos padrão' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: 'new' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('textbox', { name: 'Texto padrão' }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('textbox', { name: 'Texto padrão' }).fill('Texto Padrão');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-inputdescription').click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().locator('#field-inputdescription').fill('Texto Voz do CLiente');
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByRole('button', { name: 'save', exact: true }).click();
+  await page.locator('iframe[name="frame_middle"]').contentFrame().getByText('O registro foi incluído com').click();
+});
